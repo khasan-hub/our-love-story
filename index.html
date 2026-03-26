@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Our Love 💖</title>
+<style>
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:#0f0f1a;
+  color:white;
+  overflow-x:hidden;
+}
+
+/* LOGIN */
+#login{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  position:relative;
+  z-index:100;
+}
+input, button{
+  padding:10px;
+  border-radius:20px;
+  border:none;
+  position:relative;
+  z-index:101;
+}
+button{
+  background:#ff4d88;
+  color:white;
+  margin-top:10px;
+  cursor:pointer;
+}
+
+/* NAV */
+nav{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  padding:15px;
+  background:rgba(255,255,255,0.1);
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+nav a{cursor:pointer; color:white; text-decoration:none; font-weight:bold;}
+
+/* PAGE */
+.page{display:none;padding:20px;text-align:center;}
+.active{display:block;}
+
+/* HEART ANIMASI */
+.heart{
+  position:fixed;
+  animation:float 5s linear;
+  font-size:25px;
+}
+@keyframes float{
+  0%{transform:translateY(100vh) rotate(0deg);}
+  100%{transform:translateY(-10vh) rotate(360deg);}
+}
+
+/* LOVE BESAR BACKGROUND */
+.big-love{
+  position:fixed;
+  font-size:200px;
+  color:rgba(255,0,128,0.1);
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  animation:beat 2s infinite;
+  z-index:0;
+}
+@keyframes beat{
+  0%,100%{transform:translate(-50%,-50%) scale(1);}
+  50%{transform:translate(-50%,-50%) scale(1.1);}
+}
+
+/* POPUP LOVE SUDUT */
+.corner-love{
+  position:fixed;
+  font-size:30px;
+  z-index:50;
+  animation:corner-beat 2s infinite;
+}
+@keyframes corner-beat{
+  0%,100%{transform:translate(0,0) scale(1);}
+  50%{transform:translate(0,0) scale(1.3);}
+}
+
+/* SLIDESHOW */
+.slideshow{
+  position:relative;
+  width:80%;
+  margin:auto;
+  border-radius:20px;
+  overflow:hidden;
+}
+.slideshow img{
+  width:100%;
+  height:400px;
+  object-fit:cover;
+  display:none;
+}
+.slideshow img.active-slide{display:block;}
+
+/* CHAT */
+.chat{
+  max-width:300px;
+  margin:auto;
+  text-align:left;
+}
+.bubble{background:#25D366;padding:10px;border-radius:15px;margin:5px;width:fit-content;}
+.me{background:#128C7E;margin-left:auto;}
+
+/* GALLERY */
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
+  gap:15px;
+  padding:20px;
+}
+.photo{
+  background:rgba(255,255,255,0.1);
+  height:120px;
+  border-radius:15px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  cursor:pointer;
+  transition:0.3s;
+}
+.photo:hover{transform:scale(1.05);}
+.photo img{width:100%;height:100%;object-fit:cover;}
+.photo.empty{font-size:30px;color:#aaa;}
+
+/* HOME FOTO GRID */
+.home-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(100px,1fr));
+  gap:10px;
+  margin-top:20px;
+}
+.home-grid img{
+  width:100%;
+  height:100px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+/* LOVE PAGE */
+.love-page{
+  height:80vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOVE BACKGROUND -->
+<div class="big-love">❤️</div>
+
+<!-- POPUP LOVE SUDUT -->
+<div id="corner-love" class="corner-love" style="top:10px; right:10px;">❤️</div>
+
+<!-- LOGIN -->
+<div id="login">
+  <h2>💖 Masukkan Password 💖</h2>
+  <input type="password" id="pass" placeholder="Masukkan password">
+  <button onclick="check()">Masuk</button>
+</div>
+
+<!-- MAIN -->
+<div id="main" style="display:none;">
+<nav>
+  <a onclick="show('home')">Home</a>
+  <a onclick="show('video')">Video</a>
+  <a onclick="show('chat')">Chat</a>
+  <a onclick="show('gallery')">Gallery</a>
+  <a onclick="show('love')">💖</a>
+</nav>
+
+<!-- HOME -->
+<div id="home" class="page active">
+  <h1>💖 Our Love Story</h1>
+  <button onclick="love()">Klik Aku 💕</button>
+  <div class="home-grid">
+    <img src="foto1.jpg">
+    <img src="foto2.jpg">
+    <img src="foto3.jpg">
+    <img src="foto4.jpg">
+    <img src="foto5.jpg">
+    <img src="foto6.jpg">
+  </div>
+</div>
+
+<!-- VIDEO -->
+<div id="video" class="page">
+  <h1>🎥 Kenangan Kita</h1>
+  <video autoplay loop controls width="80%" style="border-radius:20px; margin-bottom:20px;">
+    <source src="video1.mp4">
+  </video>
+  <video autoplay loop controls width="80%" style="border-radius:20px; margin-bottom:20px;">
+    <source src="video2.mp4">
+  </video>
+  <video autoplay loop controls width="80%" style="border-radius:20px; margin-bottom:20px;">
+    <source src="video3.mp4">
+  </video>
+</div>
+
+<!-- CHAT -->
+<div id="chat" class="page">
+  <h1>💬 Chat Kita Dulu</h1>
+  <div class="chat">
+    <div class="bubble">Hai kamu 😊</div>
+    <div class="bubble me">Hai juga ❤️</div>
+    <div class="bubble">Kangen...</div>
+    <div class="bubble me">Aku juga 🥺</div>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<div id="gallery" class="page">
+  <h1>📸 Our Big Memories</h1>
+  <div class="slideshow">
+    <img src="foto1.jpg" class="active-slide">
+    <img src="foto2.jpg">
+    <img src="foto3.jpg">
+    <img src="foto4.jpg">
+    <img src="foto5.jpg">
+    <img src="foto6.jpg">
+  </div>
+  <div class="gallery-grid">
+    <div class="photo"><img src="foto1.jpg"></div>
+    <div class="photo"><img src="foto2.jpg"></div>
+    <div class="photo"><img src="foto3.jpg"></div>
+    <div class="photo"><img src="foto4.jpg"></div>
+    <div class="photo empty">+</div>
+    <div class="photo empty">+</div>
+    <div class="photo empty">+</div>
+    <div class="photo empty">+</div>
+    <div class="photo empty">+</div>
+    <div class="photo empty">+</div>
+  </div>
+</div>
+
+<!-- LOVE PAGE -->
+<div id="love" class="page">
+  <div class="love-page">
+    <h1>Will You Stay With Me? 💖</h1>
+    <button onclick="yes()">Yes 💕</button>
+    <button onclick="no()">No 😢</button>
+    <p id="result"></p>
+  </div>
+</div>
+</div>
+
+<script>
+// PASSWORD
+function check(){
+  if(document.getElementById("pass").value==="1234"){
+    document.getElementById("login").style.display="none";
+    document.getElementById("main").style.display="block";
+  } else {
+    alert("Salah 😢");
+  }
+}
+
+// NAV
+function show(p){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  document.getElementById(p).classList.add('active');
+}
+
+// LOVE ANIMASI
+function love(){
+  for(let i=0;i<20;i++){
+    let h=document.createElement("div");
+    h.innerText="💖";
+    h.className="heart";
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),4000);
+  }
+}
+
+// LOVE PAGE
+function yes(){
+  document.getElementById("result").innerText="Aku sayang kamu selamanya 💖";
+}
+function no(){
+  document.getElementById("result").innerText="Yakin? 😢 coba pikir lagi...";
+}
+
+// SLIDESHOW OTOMATIS
+let slideIndex=0;
+function showSlides(){
+  let slides=document.querySelectorAll(".slideshow img");
+  slides.forEach(s=>s.classList.remove("active-slide"));
+  slideIndex++;
+  if(slideIndex>slides.length) slideIndex=1;
+  slides[slideIndex-1].classList.add("active-slide");
+  setTimeout(showSlides,3000);
+}
+showSlides();
+
+// POPUP LOVE SUDUT GERAK
+let cornerLove=document.getElementById("corner-love");
+let directionX=1;
+let directionY=1;
+let posX=10, posY=10;
+function moveCornerLove(){
+  const width = window.innerWidth - 40;
+  const height = window.innerHeight - 40;
+  posX += directionX;
+  posY += directionY;
+  if(posX<10 || posX>width) directionX*=-1;
+  if(posY<10 || posY>height) directionY*=-1;
+  cornerLove.style.left=posX+'px';
+  cornerLove.style.top=posY+'px';
+  requestAnimationFrame(moveCornerLove);
+}
+moveCornerLove();
+</script>
+
+</body>
+</html>
