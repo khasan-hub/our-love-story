@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Our Universe 💖</title>
+
+<style>
+* {margin:0; padding:0; box-sizing:border-box;}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  overflow-x:hidden;
+  background:#0f0f1a;
+  color:white;
+}
+
+/* PARALLAX */
+.section {
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+  padding:20px;
+}
+
+.bg1 {
+  background:url('bg1.jpg') center/cover fixed;
+}
+
+.bg2 {
+  background:url('bg2.jpg') center/cover fixed;
+}
+
+.bg3 {
+  background:url('bg3.jpg') center/cover fixed;
+}
+
+.overlay {
+  background:rgba(0,0,0,0.5);
+  padding:30px;
+  border-radius:20px;
+}
+
+/* TEXT STYLE */
+h1 {
+  font-size:50px;
+  letter-spacing:2px;
+}
+
+p {
+  margin-top:10px;
+  font-size:18px;
+}
+
+/* BUTTON */
+button {
+  margin-top:20px;
+  padding:10px 20px;
+  border:none;
+  border-radius:30px;
+  background:#ff4d88;
+  color:white;
+  cursor:pointer;
+}
+
+/* GALLERY */
+.gallery {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.gallery img {
+  width:150px;
+  margin:10px;
+  border-radius:15px;
+  transition:0.4s;
+}
+
+.gallery img:hover {
+  transform:scale(1.1);
+}
+
+/* MODAL */
+#modal {
+  position:fixed;
+  top:0; left:0;
+  width:100%;
+  height:100%;
+  display:none;
+  background:rgba(0,0,0,0.9);
+  justify-content:center;
+  align-items:center;
+}
+
+#modal img {
+  width:300px;
+  border-radius:20px;
+}
+
+/* LOVE FLOAT */
+.heart {
+  position:fixed;
+  color:#ff80aa;
+  animation:float 6s linear infinite;
+}
+
+@keyframes float {
+  0% {transform:translateY(100vh);}
+  100% {transform:translateY(-10vh);}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SECTION 1 -->
+<div class="section bg1">
+  <div class="overlay">
+    <h1>💖 Our Universe</h1>
+    <p>Kisah kita, dalam satu dunia kecil ✨</p>
+  </div>
+</div>
+
+<!-- SECTION 2 -->
+<div class="section bg2">
+  <div class="overlay">
+    <h1>⏳ Our Time</h1>
+    <p id="days"></p>
+  </div>
+</div>
+
+<!-- SECTION 3 -->
+<div class="section bg3">
+  <div class="overlay">
+    <h1>📸 Our Moments</h1>
+    <div class="gallery">
+      <img src="foto1.jpg" onclick="openModal(this.src)">
+      <img src="foto2.jpg" onclick="openModal(this.src)">
+      <img src="foto3.jpg" onclick="openModal(this.src)">
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 4 -->
+<div class="section bg1">
+  <div class="overlay">
+    <h1>💌 For You</h1>
+    <p>
+      Aku nggak butuh dunia yang sempurna,<br>
+      aku cuma butuh kamu di dalamnya 💖
+    </p>
+    <button onclick="showLove()">Klik Aku 💕</button>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div id="modal" onclick="closeModal()">
+  <img id="modalImg">
+</div>
+
+<!-- AUDIO -->
+<audio autoplay loop>
+  <source src="music.mp3">
+</audio>
+
+<script>
+// HITUNG HARI
+const start = new Date("2023-01-01"); // ganti
+const now = new Date();
+const days = Math.floor((now - start)/(1000*60*60*24));
+document.getElementById("days").innerText = days + " hari bersama 💕";
+
+// MODAL
+function openModal(src){
+  document.getElementById("modal").style.display="flex";
+  document.getElementById("modalImg").src=src;
+}
+
+function closeModal(){
+  document.getElementById("modal").style.display="none";
+}
+
+// LOVE EFFECT
+function showLove(){
+  for(let i=0;i<20;i++){
+    let h = document.createElement("div");
+    h.className="heart";
+    h.innerText="💖";
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+  }
+}
+</script>
+
+</body>
+</html>
